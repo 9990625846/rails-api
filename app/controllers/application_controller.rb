@@ -2,7 +2,6 @@
  	#attr_reader :current_user
 
 	def authenticate_user
-		debugger
 		 user = User.find_by(email: params[:email])
 	  if user && user.authenticate(params[:password])
 		render json: payload(user)
@@ -24,14 +23,12 @@
 
   	private
   	def http_token
-  		debugger
 		@http_token ||= if request.headers['Authorization'].present?
 			request.headers['Authorization'].split(' ').last
    		 end
   	end
 
   	def auth_token
-  		debugger
     	@auth_token ||= JsonWebToken.decode(http_token)
   	end
 
@@ -40,7 +37,6 @@
   	end
   	
   	def payload(user)
-  		debugger
     return nil unless user and user.id
     {
 
