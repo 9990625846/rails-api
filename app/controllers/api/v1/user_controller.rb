@@ -1,4 +1,5 @@
 class Api::V1::UserController < ApplicationController
+	before_action :authenticate_request!
 	before_action :check_user , only: [:show, :update, :destroy]
 
 	def index
@@ -65,6 +66,17 @@ class Api::V1::UserController < ApplicationController
 		end
 		
 	end
+	# user login method	
+	# def create
+	#   user = User.find_by(email: params[:email])
+	#   if user && user.authenticate(params[:password])
+	#     session[:user_id] = user.id
+	#     redirect_to root_url, notice: 'Logged in!'
+	#   else
+	#     flash.now.alert = 'Email or password is invalid'
+	#     render :new
+	#   end
+	# end
 	
 
 	private
